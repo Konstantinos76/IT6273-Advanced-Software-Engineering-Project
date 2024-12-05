@@ -1,10 +1,12 @@
 import { StyleSheet, View, Text } from "react-native";
 import { theme } from "../theme";
+import { RecipeListView } from "@/components/RecipeListView";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>IT6273 Advanced Software Engineering Project</Text>
+      {/* <Text style={styles.text}>Hello IT6273 Advanced Software Engineering Project</Text> */}
+      <RecipeListView />
     </View>
   );
 }
