@@ -7,7 +7,7 @@ type Recipe = {
     name: string; 
     preparationTime: number; 
     difficulty: 'easy' | 'medium' | 'difficult'; 
-    image?: object;
+    image: object;
 };
 
 export function RecipeListView() {
