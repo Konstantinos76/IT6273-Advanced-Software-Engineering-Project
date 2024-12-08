@@ -1,20 +1,19 @@
 import React from 'react';
 import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
-import { recipes } from '../recipes'; // Importing the recipes array
+import { recipes } from '../data/recipes'; // Importing the recipes array
 import { theme } from "../theme";
 
 type Recipe = { 
     name: string; 
     preparationTime: number; 
     difficulty: 'easy' | 'medium' | 'difficult'; 
-    // image: string; // Image property is a string (path) 
+    image?: object;
 };
 
-// Function declaration format 
 export function RecipeListView() {
     const renderItem = ({ item }: { item: Recipe }) => (
         <View style={styles.itemContainer}>
-            {/* <Image source={item.image} style={styles.image} /> */}
+            <Image source={item.image} style={styles.image} />
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.details}>Time: {item.preparationTime} min</Text>
             <Text style={styles.details}>Difficulty: {item.difficulty}</Text>
@@ -31,15 +30,16 @@ export function RecipeListView() {
 
 const styles = StyleSheet.create({
     itemContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         padding: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#ccc'
+        borderBottomColor: '#ccc',
+        alignItems: 'center',
     },
     image: {
-        width: 50,
-        height: 50,
-        marginRight: 10
+        width: 300,
+        height: 300,
+        resizeMode: 'contain',
     },
     name: {
         fontSize: 18,
