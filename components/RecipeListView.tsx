@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, FlatList, StyleSheet } from 'react-native';
+import { View, Text, Image, FlatList, Pressable, StyleSheet } from 'react-native';
 import { recipes } from '../data/recipes'; // Importing the recipes array
 import { theme } from "../theme";
 
@@ -17,6 +17,9 @@ export function RecipeListView() {
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.details}>Time: {item.preparationTime} min</Text>
             <Text style={styles.details}>Difficulty: {item.difficulty}</Text>
+            <Pressable style={styles.button}>
+                <Text style={styles.buttonText}>View Recipe</Text>
+            </Pressable>
         </View>
     );
     return (
@@ -33,7 +36,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         padding: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        borderBottomColor: theme.colorLightGray,
         alignItems: 'center',
     },
     image: {
@@ -42,12 +45,31 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     name: {
-        fontSize: 18,
+        fontSize: 21,
         fontWeight: 'bold',
         color: theme.colorWhite,
+        margin: 10,
     },
     details: {
-        fontSize: 14,
+        fontSize: 16,
         color: theme.colorWhite,
-    }
+        margin: 10,
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: theme.colorBrandGreen,
+        margin: 10,
+    },
+    buttonText: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: theme.colorWhite,
+    },
 });
