@@ -1,25 +1,42 @@
-import React from 'react';
-import { View, Text, Image, FlatList, Pressable, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, FlatList, StyleSheet, Pressable, useWindowDimensions } from 'react-native';
 import { recipes } from '../data/recipes'; // Importing the recipes array
 import { theme } from "../theme";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { Link } from 'expo-router';
 
-type Recipe = { 
-    name: string; 
-    preparationTime: number; 
-    difficulty: 'easy' | 'medium' | 'difficult'; 
+type Recipe = {
+    name: string;
+    preparationTime: number;
+    difficulty: 'easy' | 'medium' | 'difficult';
     image: object;
 };
 
 export function RecipeListView() {
+    const { width } = useWindowDimensions();
+    const imageWidth = width - 50;
+    const imageHeight = imageWidth;
+
     const renderItem = ({ item }: { item: Recipe }) => (
         <View style={styles.itemContainer}>
-            <Image source={item.image} style={styles.image} />
+            <Image source={item.image} style={[styles.image, { width: imageWidth, height: imageHeight }]} />
             <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.details}>Time: {item.preparationTime} min</Text>
+            <View style={styles.timer}>
+                <MaterialIcons name="timer" size={21} color={theme.colorWhite} />
+                <Text style={styles.details}>{item.preparationTime} min</Text>
+            </View>
             <Text style={styles.details}>Difficulty: {item.difficulty}</Text>
             <Pressable style={styles.button}>
-                <Text style={styles.buttonText}>View Recipe</Text>
+                <Link href={{
+                    pathname: '/[recipeName]',
+                    params: {
+                        recipeName: item.name
+                    }
+                }}>
+                    <Text style={styles.buttonText}>View Recipe</Text>
+                </Link>
             </Pressable>
+
         </View>
     );
     return (
@@ -34,30 +51,30 @@ export function RecipeListView() {
 const styles = StyleSheet.create({
     itemContainer: {
         flexDirection: 'column',
-        padding: 10,
         borderBottomWidth: 1,
         borderBottomColor: theme.colorLightGray,
         alignItems: 'center',
+        margin: 10,
+        padding: 20,
+        backgroundColor: theme.colorCerulean,
     },
     image: {
-        width: 300,
-        height: 300,
-        resizeMode: 'contain',
+        maxWidth: 500,
+        maxHeight: 500,
+        borderRadius: 8,
     },
     name: {
-        fontSize: 21,
+        fontSize: 28,
         fontWeight: 'bold',
         color: theme.colorWhite,
         margin: 10,
     },
     details: {
-        fontSize: 16,
+        fontSize: 18,
         color: theme.colorWhite,
         margin: 10,
     },
     button: {
-        alignItems: 'center',
-        justifyContent: 'center',
         paddingVertical: 12,
         paddingHorizontal: 32,
         borderRadius: 4,
@@ -66,10 +83,14 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     buttonText: {
-        fontSize: 16,
+        fontSize: 21,
         lineHeight: 21,
         fontWeight: 'bold',
         letterSpacing: 0.25,
         color: theme.colorWhite,
+    },
+    timer: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
 });
