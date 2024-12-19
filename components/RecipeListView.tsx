@@ -10,6 +10,13 @@ type Recipe = {
     preparationTime: number;
     difficulty: 'easy' | 'medium' | 'difficult';
     image: object;
+    imageURL: string;
+    productImageURL: string;
+    ingredients: string;
+    preparationSteps: string;
+    productName: string;
+    wayOfCooking: string;
+    tip?: string;
 };
 
 export function RecipeListView() {
@@ -30,7 +37,16 @@ export function RecipeListView() {
                 <Link href={{
                     pathname: '/[recipeName]',
                     params: {
-                        recipeName: item.name
+                        recipeName: item.name,
+                        preparationTime: item.preparationTime,
+                        difficulty: item.difficulty,
+                        ingredients: item.ingredients,
+                        preparationSteps: item.preparationSteps,
+                        productName: item.productName,
+                        imageURL: item.imageURL,
+                        productImageURL: item.productImageURL,
+                        wayOfCooking: item.wayOfCooking,
+                        tip: item.tip,
                     }
                 }}>
                     <Text style={styles.buttonText}>View Recipe</Text>
