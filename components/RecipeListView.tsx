@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
     },
     name: {
-        fontSize: 28,
+        fontSize: 24,
         fontWeight: 'bold',
         color: theme.colorWhite,
         margin: 10,

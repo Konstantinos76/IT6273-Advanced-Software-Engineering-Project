@@ -7,6 +7,6 @@ export const theme = {
     colorRed: "#ee6055",
     colorBrandBlue: "#0072bc",
     colorBrandGreen: "#7fbe41",
-    colorBrandYellow: "#fdc08",
+    colorBrandYellow: "#fece08",
     colorBrandBlueDarker: '#186192',
   };
