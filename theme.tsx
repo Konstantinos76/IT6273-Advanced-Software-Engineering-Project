@@ -9,4 +9,5 @@ export const theme = {
     colorBrandGreen: "#7fbe41",
     colorBrandYellow: "#fece08",
     colorBrandBlueDarker: '#186192',
+    colorBrandLightGreen: '#d5e6af',
   };

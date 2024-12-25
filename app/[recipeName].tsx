@@ -2,28 +2,41 @@ import { ScrollView, View, Text, Image, StyleSheet, useWindowDimensions, } from 
 import { useLocalSearchParams } from 'expo-router';
 import { theme } from "../theme";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Entypo from '@expo/vector-icons/Entypo';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
-type Params = { 
-    recipeName: string; 
-    imageURL: string; 
-    preparationTime: string; 
-    difficulty: string; 
-    ingredients: string; 
-    preparationSteps: string; 
-    productName: string; 
-    productImageURL: string; 
-    wayOfCooking: string; 
-    tip: string; 
+
+type Params = {
+    recipeName: string;
+    imageURL: string;
+    preparationTime: string;
+    difficulty: string;
+    ingredients: string;
+    preparationSteps: string;
+    productName: string;
+    productImageURL: string;
+    wayOfCooking: string;
+    tip: string;
 };
 
 export default function RecipeDetailView() {
     const local = useLocalSearchParams<Params>();
 
     const { width } = useWindowDimensions();
-    const imageWidth = width-40;
+    const imageWidth = width - 40;
     const imageHeight = imageWidth;
 
-    const recipeImages:{ [key: string]: any } = { 
+    const getDifficultyIcon = (difficulty: string) => {
+        switch (difficulty) {
+            case 'easy': return <Entypo name="progress-one" size={18} color={theme.colorBrandBlue} />;
+            case 'medium': return <Entypo name="progress-two" size={18} color={theme.colorBrandBlue} />;
+            case 'difficult': return <Entypo name="progress-full" size={18} color={theme.colorBrandBlue} />;
+            default: return null;
+        }
+    };
+
+    const recipeImages: { [key: string]: any } = {
         '../assets/images/chicken-fajitas-with-guacamole.jpg': (require('../assets/images/chicken-fajitas-with-guacamole.jpg')),
         '../assets/images/stir-fry-with-chicken.jpg': (require('../assets/images/stir-fry-with-chicken.jpg')),
         '../assets/images/stuffed-chicken-with-manouri-and-gruyere-cheese.jpg': (require('../assets/images/stuffed-chicken-with-manouri-and-gruyere-cheese.jpg')),
@@ -36,7 +49,7 @@ export default function RecipeDetailView() {
         '../assets/images/spicy-schnitzel-with-jasmine-rice-and-curry-sauce.jpg': (require('../assets/images/spicy-schnitzel-with-jasmine-rice-and-curry-sauce.jpg')),
     };
 
-    const productImages:{ [key: string]: any } = { 
+    const productImages: { [key: string]: any } = {
         '../assets/images/products/chicken-breast-fillet.png': (require('../assets/images/products/chicken-breast-fillet.png')),
         '../assets/images/products/chicken-drumsticks.png': (require('../assets/images/products/chicken-drumsticks.png')),
         '../assets/images/products/chicken-legs.png': (require('../assets/images/products/chicken-legs.png')),
@@ -59,26 +72,44 @@ export default function RecipeDetailView() {
                 <Text style={styles.text}>This recipe is made with:</Text>
                 <Text style={styles.productTitle}>{local.productName}</Text>
                 <View style={styles.infoArea}>
-                    <MaterialIcons name="timer" size={21} color={theme.colorBrandBlue} />
-                    <Text style={styles.infoAreaText}>Ready in <Text style={styles.info}>{local.preparationTime}</Text> min</Text>
-                    <Text style={styles.infoAreaText}>Difficult to cook? It's <Text style={styles.info}>{local.difficulty}</Text></Text>
-                    <Text style={styles.infoAreaText}>Way of Cooking <Text style={styles.info}>{local.wayOfCooking}</Text></Text>
+                    <View style={styles.infoAreaRow}>
+                        <MaterialIcons name="timer" size={18} color={theme.colorBrandBlue} />
+                        <Text style={styles.infoAreaText}> Ready in<Text style={styles.info}> {local.preparationTime} min</Text></Text>
+                    </View>
+                    <View style={styles.infoAreaRow}>
+                        {getDifficultyIcon(local.difficulty)}
+                        <Text style={styles.infoAreaText}> Difficulty: <Text style={styles.info}>{local.difficulty}</Text></Text>
+                    </View>
+                    <View style={styles.infoAreaRow}>
+                        <MaterialCommunityIcons name="pot-steam" size={18} color={theme.colorBrandBlue} />
+                        <Text style={styles.infoAreaText}> Cooking Category: <Text style={styles.info}> {local.wayOfCooking}</Text></Text>
+                    </View>
                 </View>
-                <Text style={styles.ingredientsTitle}>Ingredients:</Text>
-                <Text style={styles.ingredientsText}>{local.ingredients}</Text>
-                <Text style={styles.preparationTitle}>Preparation:</Text>
-                <Text style={styles.preparationText}>{local.preparationSteps}</Text>
-                <Text>{local.tip}</Text>
+                <View style={styles.ingredientsArea}>
+                    <Text style={styles.ingredientsTitle}>Ingredients:</Text>
+                    <Text style={styles.ingredientsText}>{local.ingredients}</Text>
+                </View>
+                <View style={styles.preparationArea}>
+                    <Text style={styles.preparationTitle}>Preparation:</Text>
+                    <Text style={styles.preparationText}>{local.preparationSteps}</Text>
+                </View>
+                {local.tip !== "" && (
+                <View style={styles.tipArea}>
+                    <MaterialCommunityIcons name="checkbox-multiple-marked-circle-outline" size={18} color={theme.colorBrandBlueDarker} />
+                    <Text style={styles.tipText}> {local.tip}</Text>
+                </View>
+                )}
             </View>
         </ScrollView>
     )
 }
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: theme.colorBrandBlue,
-      alignItems: 'center',
-      paddingVertical: 20,
+        flex: 1,
+        backgroundColor: theme.colorBrandBlue,
+        alignItems: 'center',
+        paddingVertical: 20,
+        paddingHorizontal: 10,
     },
     image: {
         maxWidth: 500,
@@ -109,7 +140,7 @@ const styles = StyleSheet.create({
     },
     infoArea: {
         width: '100%',
-        height: 120,
+        height: 130,
         backgroundColor: theme.colorBrandYellow,
         alignItems: 'center',
         padding: 16,
@@ -125,31 +156,57 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '400',
     },
+    infoAreaRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 5,
+    },
+    ingredientsArea: {
+        paddingBottom: 20,
+        borderBottomWidth: 2,
+        borderBottomColor: theme.colorWhite,
+    },
     ingredientsTitle: {
         color: theme.colorWhite,
         fontSize: 24,
-        padding:8,
+        padding: 8,
     },
     ingredientsText: {
         color: theme.colorWhite,
         fontSize: 16,
-        padding:8,
+        padding: 8,
+    },
+    preparationArea: {
+        padding: 20,
     },
     preparationTitle: {
         color: theme.colorWhite,
         fontSize: 24,
-        padding:8,
     },
     preparationText: {
         color: theme.colorWhite,
         fontSize: 16,
-        paddingVertical:8,
-        paddingHorizontal: 16,
+        paddingVertical: 8,
+    },
+    tipArea: {
+        flexDirection: 'row',
+        backgroundColor: theme.colorBrandLightGreen,
+        padding: 16,
+        margin: 10,
+        borderTopRightRadius: 24,
+        borderTopLeftRadius: 8,
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 8,
+        alignItems: 'flex-start',
+    },
+    tipText: {
+        color: theme.colorBrandBlueDarker,
+        fontSize: 16,
+        marginHorizontal: 5,
     },
     text: {
         color: theme.colorWhite,
         fontSize: 16,
         marginBottom: 10,
     },
-  });
-  
+});
