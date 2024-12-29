@@ -1,11 +1,11 @@
 // Array of recipe objects
 export const recipes = [
     {
+      id: '1',
       name: "Chicken Fajitas with Guacamole",
-      preparationTime: 15,
+      readyAt: 15,
       difficulty: "easy",
       image: require('../assets/images/chicken-fajitas-with-guacamole.jpg'),
-      imageURL: "../assets/images/chicken-fajitas-with-guacamole.jpg",
       ingredients: 
 `For the Chicken:
 500g Chicken Breast Fillet
@@ -46,16 +46,16 @@ Add all the remaining ingredients and mix.
 For Serving:
 Serve all the ingredients on a large platter and fill each tortilla with the ingredients of your choice.`,
       productName: "Chicken Breast Fillet",
-      productImageURL: "../assets/images/products/chicken-breast-fillet.png", 
+      productImage: require('../assets/images/products/chicken-breast-fillet.png'), 
       wayOfCooking: "Airfryer",
       tip: ""
     },
     {
+      id: '2',
       name: "Stir Fry with Chicken",
-      preparationTime: 20,
+      readyAt: 20,
       difficulty: "easy",
       image: require('../assets/images/stir-fry-with-chicken.jpg'),
-      imageURL: "../assets/images/stir-fry-with-chicken.jpg",
       ingredients: 
 `For the marinade:
 400 g Chicken Leg Fillet
@@ -93,16 +93,16 @@ Add the meat with its marinade and cook for 4-5 minutes.
 Then, add the wine, broccoli, and bell pepper. 
 Serve with jasmine or basmati rice and drizzle with Asian sesame oil.`,
       productName: "Chicken Thigh Fillet",
-      productImageURL: "../assets/images/products/chicken-thigh-fillet.png", 
+      productImage: require('../assets/images/products/chicken-thigh-fillet.png'), 
       wayOfCooking: "Ethnic Cuisines",
       tip: ""
     },
     {
+      id: '3',
       name: "Stuffed Chicken with Manouri and and Gruyère Cheese",
-      preparationTime: 60,
+      readyAt: 60,
       difficulty: "difficult",
       image: require('../assets/images/stuffed-chicken-with-manouri-and-gruyere-cheese.jpg'),
-      imageURL: "../assets/images/stuffed-chicken-with-manouri-and-gruyere-cheese.jpg",
       ingredients: 
 `1 pack of Chicken Breast Fillet
 4 slices of prosciutto
@@ -128,16 +128,16 @@ Cover the dish with aluminum foil and bake in a preheated oven at 200°C (392°F
 Remove the foil and bake for another 5-6 minutes.
 Slice the chicken and serve it with the roasted cherry tomatoes and the sauce from the baking dish.`,
       productName: "Chicken Breast Fillet",
-      productImageURL: "../assets/images/products/chicken-breast-fillet.png", 
+      productImage: require('../assets/images/products/chicken-breast-fillet.png'), 
       wayOfCooking: "In the oven",
       tip: ""
     },
     {
+      id: '4',
       name: "Chicken Ragu",
-      preparationTime: 55,
+      readyAt: 55,
       difficulty: "easy",
       image: require('../assets/images/chicken-ragu.jpg'),
-      imageURL: "../assets/images/chicken-ragu.jpg",
       ingredients: 
 `1 package Chicken Legs
 6 tbsp olive oil
@@ -169,16 +169,16 @@ Return the chopped chicken to the sauce and simmer on low heat for 5 minutes.
 Cook the pappardelle (or any pasta of your choice) in salted water. Drain and drizzle with a little olive oil.
 Place the pappardelle in a large shallow dish, sprinkle with Parmesan cheese, and add the ragu along the top.`,
       productName: "Chicken Legs",
-      productImageURL: "../assets/images/products/chicken-legs.png", 
+      productImage: require('../assets/images/products/chicken-legs.png'), 
       wayOfCooking: "In the pot",
       tip: ""
     },
     {
+      id: '5',
       name: "Chicken Drumsticks with Honey",
-      preparationTime: 30,
+      readyAt: 30,
       difficulty: "medium",
       image: require('../assets/images/chicken-drumsticks-with-honey.jpg'),
-      imageURL: "../assets/images/chicken-drumsticks-with-honey.jpg",
       ingredients: 
 `2 packages of Chicken Drumsticks
 3 tbsp honey
@@ -204,16 +204,16 @@ brush them with the reserved marinade, and bake for an additional 15 minutes.
 During this time, brush the chicken 1-2 times with the leftover marinade to achieve a beautiful golden-red color.
 Serve: Once cooked, remove the chicken from the oven and let it rest for a few minutes before serving.`,
       productName: "Chicken Drumsticks",
-      productImageURL: "../assets/images/products/chicken-drumsticks.png", 
+      productImage: require('../assets/images/products/chicken-drumsticks.png'), 
       wayOfCooking: "In the oven",
       tip: "Serve with rice, potato purée, or potato salad."
     },
     {
+      id: '6',
       name: "Chicken Drumsticks with Noodles",
-      preparationTime: 70,
+      readyAt: 70,
       difficulty: "easy",
       image: require('../assets/images/chicken-drumsticks-with-noodles.jpg'),
-      imageURL: "../assets/images/chicken-drumsticks-with-noodles.jpg",
       ingredients: 
 `7 or 8 Chicken Drumsticks
 2 large onions, finely chopped
@@ -239,16 +239,16 @@ Allow the alcohol to evaporate for 2-3 minutes, then add the tomatoes, tomato pa
 Let the dish simmer for about an hour until the meat is tender and the sauce has thickened. Season generously with salt and pepper.
 Add the pasta to the sauce and cook for an additional 2 minutes. Serve with grated ladotyri cheese.`,
       productName: "Chicken Drumsticks",
-      productImageURL: "../assets/images/products/chicken-drumsticks.png", 
+      productImage: require('../assets/images/products/chicken-drumsticks.png'), 
       wayOfCooking: "In the pot",
       tip: "Depending on your oven, you can reduce the cooking time to 45-50 minutes to keep the dish juicier."
     },
     {
+      id: '7',
       name: "Chicken Drumsticks in Peanut Sauce (Satay)",
-      preparationTime: 65,
+      readyAt: 65,
       difficulty: "medium",
       image: require('../assets/images/chicken-drumsticks-in-peanut-sauce-satay.jpg'),
-      imageURL: "../assets/images/chicken-drumsticks-in-peanut-sauce-satay.jpg",
       ingredients: 
 `7 or 8 Chicken Drumsticks
 2 tbsp fresh ginger, finely chopped
@@ -269,16 +269,16 @@ Preheat the oven grill to 180ºC and grill the chicken for about 30 minutes.
 In another bowl, mix all the sauce ingredients very well until combined.
 Serve the grilled chicken alongside the peanut sauce.`,
       productName: "Chicken Drumsticks",
-      productImageURL: "../assets/images/products/chicken-drumsticks.png", 
+      productImage: require('../assets/images/products/chicken-drumsticks.png'), 
       wayOfCooking: "In the oven",
       tip: ""
     },
     {
+      id: '8',
       name: "Exotic Chicken Fillet with Coconut Milk, Sun-Dried Tomatoes & Spinach",
-      preparationTime: 40,
+      readyAt: 40,
       difficulty: "easy",
       image: require('../assets/images/exotic-chicken-fillet-with-coconut-milk-sun-dried-tomatoes-and-spinach.jpg'),
-      imageURL: "../assets/images/exotic-chicken-fillet-with-coconut-milk-sun-dried-tomatoes-and-spinach.jpg",
       ingredients: 
 `1 package of Chicken Thigh Fillet
 2 tbsp butter
@@ -298,16 +298,16 @@ Add the sun-dried tomatoes and spinach and sauté everything together for a few 
 Return the fillets to the pan, pour in the coconut milk, and add the Parmesan cheese. 
 Lower the heat and stir the pan occasionally until the milk thickens.`,
       productName: "Chicken Thigh Fillet",
-      productImageURL: "../assets/images/products/chicken-thigh-fillet.png", 
+      productImage: require('../assets/images/products/chicken-thigh-fillet.png'), 
       wayOfCooking: "In the frying pan",
       tip: "You can enjoy it with rice or baked potatoes."
     },
     {
+      id: '9',
       name: "Pappardelle with Chicken Ragout",
-      preparationTime: 55,
+      readyAt: 55,
       difficulty: "easy",
       image: require('../assets/images/pappardelle-with-chicken-ragout.jpg'),
-      imageURL: "../assets/images/pappardelle-with-chicken-ragout.jpg",
       ingredients: 
 `650 g Chicken Thigh Fillet
 2 dry onions
@@ -326,16 +326,16 @@ Sauté the chicken until it gets a nice color, then add the vegetables, three te
 Add a little sweet white wine, water, fresh thyme, and lower the heat.
 Fifteen minutes before the ragout is finished cooking, add some water from the pasta, Parmesan cheese, olive oil, and mix well.`,
       productName: "Chicken Thigh Fillet",
-      productImageURL: "../assets/images/products/chicken-thigh-fillet.png", 
+      productImage: require('../assets/images/products/chicken-thigh-fillet.png'), 
       wayOfCooking: "In the pot",
       tip: ""
     },
     {
+      id: '10',
       name: "Spicy Schnitzel with Jasmine Rice and Curry Sauce",
-      preparationTime: 50,
+      readyAt: 50,
       difficulty: "medium",
       image: require('../assets/images/spicy-schnitzel-with-jasmine-rice-and-curry-sauce.jpg'),
-      imageURL: "../assets/images/spicy-schnitzel-with-jasmine-rice-and-curry-sauce.jpg",
       ingredients: 
 `Spicy Chicken Schnitzel Limited Edition
 500 g jasmine rice
@@ -355,7 +355,7 @@ Next, let's make the curry sauce. In a container, add olive oil and sauté chopp
 then deglaze with cream, glazing for 5 minutes before finally adding the curry.
 Serve by placing curry sauce at the bottom of the plate and topping it with the spicy schnitzel, sliced, along with the garnishes.`,
       productName: "Spicy Chicken Schnitzel",
-      productImageURL: "../assets/images/products/spicy-chicken-schnitzel.png", 
+      productImage: require('../assets/images/products/spicy-chicken-schnitzel.png'), 
       wayOfCooking: "Ethnic Cuisines",
       tip: "We can use cumin instead of curry."
     }

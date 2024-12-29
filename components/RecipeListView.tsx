@@ -7,17 +7,11 @@ import { Link } from 'expo-router';
 import Entypo from '@expo/vector-icons/Entypo';
 
 type Recipe = {
+    id: string;
     name: string;
-    preparationTime: number;
+    readyAt: number;
     difficulty: 'easy' | 'medium' | 'difficult';
     image: object;
-    imageURL: string;
-    productImageURL: string;
-    ingredients: string;
-    preparationSteps: string;
-    productName: string;
-    wayOfCooking: string;
-    tip?: string;
 };
 
 export function RecipeListView() {
@@ -36,11 +30,21 @@ export function RecipeListView() {
 
     const renderItem = ({ item }: { item: Recipe }) => (
         <View style={styles.itemContainer}>
-            <Image source={item.image} style={[styles.image, { width: imageWidth, height: imageHeight }]} />
+            <Pressable>
+                <Link href={{
+                    pathname: '/[recipeName]',
+                    params: {
+                        id: item.id,
+                        recipeName: item.name,
+                    }
+                }}>
+                    <Image source={item.image} style={[styles.image, { width: imageWidth, height: imageHeight }]} />
+                </Link>
+            </Pressable>
             <Text style={styles.name}>{item.name}</Text>
             <View style={styles.infoRow}>
                 <MaterialIcons name="timer" size={18} color={theme.colorWhite} />
-                <Text style={styles.infoAreaText}>Ready in <Text style={styles.info}>{item.preparationTime} min</Text></Text>
+                <Text style={styles.infoAreaText}>Ready in <Text style={styles.info}>{item.readyAt} min</Text></Text>
             </View>
             <View style={styles.infoRow}>
                 {getDifficultyIcon(item.difficulty)}
@@ -50,22 +54,13 @@ export function RecipeListView() {
                 <Link href={{
                     pathname: '/[recipeName]',
                     params: {
+                        id: item.id,
                         recipeName: item.name,
-                        preparationTime: item.preparationTime,
-                        difficulty: item.difficulty,
-                        ingredients: item.ingredients,
-                        preparationSteps: item.preparationSteps,
-                        productName: item.productName,
-                        imageURL: item.imageURL,
-                        productImageURL: item.productImageURL,
-                        wayOfCooking: item.wayOfCooking,
-                        tip: item.tip,
                     }
                 }}>
                     <Text style={styles.buttonText}>View Recipe</Text>
                 </Link>
             </Pressable>
-
         </View>
     );
     return (

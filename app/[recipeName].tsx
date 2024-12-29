@@ -1,27 +1,24 @@
 import { ScrollView, View, Text, Image, StyleSheet, useWindowDimensions, } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
+import { recipes } from '../data/recipes'; // Importing the recipes array
 import { theme } from "../theme";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import Entypo from '@expo/vector-icons/Entypo';
-import AntDesign from '@expo/vector-icons/AntDesign';
-
+// import AntDesign from '@expo/vector-icons/AntDesign';
 
 type Params = {
-    recipeName: string;
-    imageURL: string;
-    preparationTime: string;
-    difficulty: string;
-    ingredients: string;
-    preparationSteps: string;
-    productName: string;
-    productImageURL: string;
-    wayOfCooking: string;
-    tip: string;
+    id: string;
 };
 
 export default function RecipeDetailView() {
     const local = useLocalSearchParams<Params>();
+    // Find the recipe by ID 
+    const recipe = recipes.find((r) => r.id === local.id);
+
+    if (!recipe) { 
+        return <Text>No recipe found!</Text>;
+    }
 
     const { width } = useWindowDimensions();
     const imageWidth = width - 40;
@@ -36,67 +33,46 @@ export default function RecipeDetailView() {
         }
     };
 
-    const recipeImages: { [key: string]: any } = {
-        '../assets/images/chicken-fajitas-with-guacamole.jpg': (require('../assets/images/chicken-fajitas-with-guacamole.jpg')),
-        '../assets/images/stir-fry-with-chicken.jpg': (require('../assets/images/stir-fry-with-chicken.jpg')),
-        '../assets/images/stuffed-chicken-with-manouri-and-gruyere-cheese.jpg': (require('../assets/images/stuffed-chicken-with-manouri-and-gruyere-cheese.jpg')),
-        '../assets/images/chicken-ragu.jpg': (require('../assets/images/chicken-ragu.jpg')),
-        '../assets/images/chicken-drumsticks-with-honey.jpg': (require('../assets/images/chicken-drumsticks-with-honey.jpg')),
-        '../assets/images/chicken-drumsticks-with-noodles.jpg': (require('../assets/images/chicken-drumsticks-with-noodles.jpg')),
-        '../assets/images/chicken-drumsticks-in-peanut-sauce-satay.jpg': (require('../assets/images/chicken-drumsticks-in-peanut-sauce-satay.jpg')),
-        '../assets/images/exotic-chicken-fillet-with-coconut-milk-sun-dried-tomatoes-and-spinach.jpg': (require('../assets/images/exotic-chicken-fillet-with-coconut-milk-sun-dried-tomatoes-and-spinach.jpg')),
-        '../assets/images/pappardelle-with-chicken-ragout.jpg': (require('../assets/images/pappardelle-with-chicken-ragout.jpg')),
-        '../assets/images/spicy-schnitzel-with-jasmine-rice-and-curry-sauce.jpg': (require('../assets/images/spicy-schnitzel-with-jasmine-rice-and-curry-sauce.jpg')),
-    };
-
-    const productImages: { [key: string]: any } = {
-        '../assets/images/products/chicken-breast-fillet.png': (require('../assets/images/products/chicken-breast-fillet.png')),
-        '../assets/images/products/chicken-drumsticks.png': (require('../assets/images/products/chicken-drumsticks.png')),
-        '../assets/images/products/chicken-legs.png': (require('../assets/images/products/chicken-legs.png')),
-        '../assets/images/products/chicken-thigh-fillet.png': (require('../assets/images/products/chicken-thigh-fillet.png')),
-        '../assets/images/products/spicy-chicken-schnitzel.png': (require('../assets/images/products/spicy-chicken-schnitzel.png')),
-    };
-
     return (
         <ScrollView>
             <View style={styles.container}>
                 <Image
                     style={[styles.image, { width: imageWidth, height: imageHeight }]}
-                    source={recipeImages[local.imageURL]}
+                    source={recipe.image}
                 />
-                <Text style={styles.recipeTitle}>{local.recipeName}</Text>
+                <Text style={styles.recipeTitle}>{recipe.name}</Text>
                 <Image
                     style={[styles.productImage, { width: 180, height: 180 }]}
-                    source={productImages[local.productImageURL]}
+                    source={recipe.productImage}
                 />
                 <Text style={styles.text}>This recipe is made with:</Text>
-                <Text style={styles.productTitle}>{local.productName}</Text>
+                <Text style={styles.productTitle}>{recipe.productName}</Text>
                 <View style={styles.infoArea}>
                     <View style={styles.infoAreaRow}>
                         <MaterialIcons name="timer" size={18} color={theme.colorBrandBlue} />
-                        <Text style={styles.infoAreaText}> Ready in<Text style={styles.info}> {local.preparationTime} min</Text></Text>
+                        <Text style={styles.infoAreaText}> Ready in<Text style={styles.info}> {recipe.readyAt} min</Text></Text>
                     </View>
                     <View style={styles.infoAreaRow}>
-                        {getDifficultyIcon(local.difficulty)}
-                        <Text style={styles.infoAreaText}> Difficulty: <Text style={styles.info}>{local.difficulty}</Text></Text>
+                        {getDifficultyIcon(recipe.difficulty)}
+                        <Text style={styles.infoAreaText}> Difficulty: <Text style={styles.info}>{recipe.difficulty}</Text></Text>
                     </View>
                     <View style={styles.infoAreaRow}>
                         <MaterialCommunityIcons name="pot-steam" size={18} color={theme.colorBrandBlue} />
-                        <Text style={styles.infoAreaText}> Cooking Category: <Text style={styles.info}> {local.wayOfCooking}</Text></Text>
+                        <Text style={styles.infoAreaText}> Cooking Category: <Text style={styles.info}>{recipe.wayOfCooking}</Text></Text>
                     </View>
                 </View>
                 <View style={styles.ingredientsArea}>
                     <Text style={styles.ingredientsTitle}>Ingredients:</Text>
-                    <Text style={styles.ingredientsText}>{local.ingredients}</Text>
+                    <Text style={styles.ingredientsText}>{recipe.ingredients}</Text>
                 </View>
                 <View style={styles.preparationArea}>
                     <Text style={styles.preparationTitle}>Preparation:</Text>
-                    <Text style={styles.preparationText}>{local.preparationSteps}</Text>
+                    <Text style={styles.preparationText}>{recipe.preparationSteps}</Text>
                 </View>
-                {local.tip !== "" && (
+                {recipe.tip !== "" && (
                 <View style={styles.tipArea}>
                     <MaterialCommunityIcons name="checkbox-multiple-marked-circle-outline" size={18} color={theme.colorBrandBlueDarker} />
-                    <Text style={styles.tipText}> {local.tip}</Text>
+                    <Text style={styles.tipText}> {recipe.tip}</Text>
                 </View>
                 )}
             </View>
