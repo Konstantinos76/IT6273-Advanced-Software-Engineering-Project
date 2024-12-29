@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
     info: {
         fontSize: 18,
         color: theme.colorWhite,
-        margin: 10,
         fontWeight: '700',
     },
     infoAreaText: {
